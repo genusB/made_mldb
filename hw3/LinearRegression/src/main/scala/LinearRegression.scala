@@ -1,6 +1,9 @@
 import breeze.linalg.{DenseMatrix, DenseVector, InjectNumericOps, norm}
-import breeze.numerics.{pow, abs}
+import breeze.numerics.{abs, pow}
 import breeze.stats.mean
+
+import java.io._
+import scala.collection.mutable.ListBuffer
 
 object LinearRegression {
 
@@ -22,9 +25,12 @@ object LinearRegression {
 
   def gradientDescent(X: DenseMatrix[Double], y: DenseVector[Double],
                       w: DenseVector[Double], learning_rate: Double = 0.01,
-                      epochs: Int = 100, logMetrics: Boolean = false): DenseVector[Double] = {
+                      epochs: Int = 100): DenseVector[Double] = {
 
     var w_estimate: DenseVector[Double] = w
+
+    val fileObject = new File("./metrics.txt")
+    val printWriter = new PrintWriter(fileObject)
 
     for (i <- 0 to epochs) {
       val empirical_risk = mse(X, y, w_estimate)
@@ -37,10 +43,12 @@ object LinearRegression {
 
       w_estimate = w_estimate - (learning_rate *:* gradient)
 
-      if (logMetrics && i % 25 == 0) {
-        println(empirical_risk)
+      if (i % 25 == 0) {
+        printWriter.write(empirical_risk.toString + "\n")
       }
     }
+
+    printWriter.close()
 
     w_estimate
   }
