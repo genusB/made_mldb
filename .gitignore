@@ -1,3 +1,13 @@
 
 .DS_Store
 hw1/.idea
+
+hw3/LinearRegression/target
+hw3/LinearRegression/project/target
+hw3/LinearRegression/.ipynb_checkpoints
+
+hw3/LinearRegression/.idea/**/workspace.xml
+hw3/LinearRegression/.idea/**/tasks.xml
+hw3/LinearRegression/.idea/**/usage.statistics.xml
+hw3/LinearRegression/.idea/**/dictionaries
+hw3/LinearRegression/.idea/**/shelf
